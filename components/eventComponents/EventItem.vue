@@ -52,7 +52,7 @@ function handleEventItem (eventItemData: Event) {
 					style.value.zIndex = '999';
 					style.value.width = `${rect.width}px`;
 					style.value.height = `${rect.height}px`;
-					style.value.top = `${rect.top}px`;
+					style.value.top = `${rect.top + uni.getWindowInfo().windowTop}px`;
 					style.value.left = `${rect.left}px`;
 
 					animationData.value = animation.width('100vw')
@@ -85,8 +85,6 @@ function collapse() {
 	setTimeout(() => {
 		style.value.position = '';
 		style.value.zIndex = '';
-		style.value.width = '';
-		style.value.height = '';
 		style.value.top = '';
 		style.value.left = '';
 		showPlaceholder.value = false;
