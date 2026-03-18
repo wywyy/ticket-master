@@ -29,6 +29,7 @@ const animation = uni.createAnimation({
 });
 
 const eventId = ref('');
+
 function handleEventItem (eventItemData: Event) {
 	if (!expanded.value) {
 		lockPage();
@@ -71,8 +72,6 @@ function handleEventItem (eventItemData: Event) {
 }
 
 function collapse() {
-	const el = detailsRef.value.$el;
-
 	animationData.value = animation.width(rect.width)
 		.height(rect.height)
 		.top(rect.top)
@@ -105,8 +104,8 @@ function collapse() {
 		height: style.height,
 		top: style.top,
 		left: style.left,
-	}" @click="handleEventItem(eventItemData)" @touchmove.stop="() => { }">
-		<view class="waterfall-item__image">
+	}" @click="handleEventItem(eventItemData)">
+		<view>
 			<image :src="eventItemData.images[0].url" mode="widthFix" style="width: 100%"></image>
 			<view v-if="expanded" class="close-button" @click.stop="collapse">
 				<uv-icon name="close-circle-fill" color="#ffffff4d" size="56rpx" />
