@@ -8,7 +8,7 @@ const props = defineProps(['eventId']);
 // 活动详情数据
 const eventData = ref();
 // 是否展示底部按钮
-const showBottonBtn = ref(true);
+const showBottomButton = ref(true);
 
 watch(() => props.eventId, (value) => {
 	if (value) {
@@ -20,7 +20,7 @@ watch(() => props.eventId, (value) => {
 
 // 查询详情数据
 async function queryEventDetails() {
-	showBottonBtn.value = true;
+	showBottomButton.value = true;
 	const res = await ticketApi.getEventDetails(props.eventId);
 	eventData.value = res;
 }
@@ -86,7 +86,7 @@ function formatDateTime(dateTimeStr: string) {
 
 
 		<!-- 底部固定按钮 -->
-		<!-- <view v-if="showBottonBtn" class="bottom-btn-area">
+		<!-- <view v-if="showBottomButton" class="bottom-btn-area">
 						<view class="seat-btn">
 				<uv-icon name="empty-address" color="#7d7e80" size="38rpx" label="座位图" labelPos="bootom"
 					labelSize="16rpx" labelColor="7d7e80" space="8rpx"></uv-icon>
