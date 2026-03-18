@@ -40,7 +40,7 @@ function handleEventItem (eventItemData: Event) {
 				showPlaceholder.value = true;
 
 				if (!detailsHeight.value) {
-					detailsHeight.value = rect.height;
+					detailsHeight.value = `${rect.height}px`;
 				}
 
 				setTimeout(() => {
