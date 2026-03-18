@@ -133,13 +133,15 @@ function collapse() {
 }
 
 .event-card {
-	position: relative;
-	// transition: all .3s ease-in-out;
+	transition: border-radius .3s ease-in-out;
+	border-radius: 6px;
 	background: #fff;
 	overflow: auto;
 	overscroll-behavior: contain;
 
 	&.expanded {
+		border-radius: 0;
+
 		.title {
 			font-size: 40rpx !important;
 		}

@@ -180,6 +180,5 @@ function usePageLock() {
 .waterfall-item {
 	overflow: hidden;
 	margin-top: 10px;
-	border-radius: 6px;
 }
 </style>
