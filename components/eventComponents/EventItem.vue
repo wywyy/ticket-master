@@ -45,23 +45,25 @@ function handleEventItem (eventItemData: Event) {
 
 				setTimeout(() => {
 					expanded.value = true;
-				}, 200);
+				}, 300);
 
-				nextTick(() => {
-					style.value.position = 'fixed';
-					style.value.zIndex = '999';
-					style.value.width = `${rect.width}px`;
-					style.value.height = `${rect.height}px`;
-					style.value.top = `${rect.top + uni.getWindowInfo().windowTop}px`;
-					style.value.left = `${rect.left}px`;
+				style.value.position = 'fixed';
+				style.value.zIndex = '999';
+				style.value.width = `${rect.width}px`;
+				style.value.height = `${rect.height}px`;
+				style.value.top = `${rect.top + uni.getWindowInfo().windowTop}px`;
+				style.value.left = `${rect.left}px`;
 
-					animationData.value = animation.width('100vw')
+				// 曲线救国，应该是要等浏览器重绘后再开始动画
+				setTimeout(() => {
+					animationData.value = animation
+						.width('100vw')
 						.height('100vh')
 						.top(0)
 						.left(0)
 						.step()
 						.export();
-				});
+				}, 150);
 			})
 			.exec();
 		eventId.value = eventItemData.id;
