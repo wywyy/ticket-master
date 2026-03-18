@@ -8,10 +8,12 @@ import EventItem from '@/components/eventComponents/EventItem.vue'
 const waterfallRef = ref();
 // 关键字搜索
 const keyword = ref<string>('');
+// 搜索tag
+const isSearchTag = ref<boolean>(false);
 // 列表数据
 const EventList = ref<Array<Event>>([]);
 // 分页
-const page = ref(1);
+const page = ref<number>(1);
 //页面锁定
 const {
 	pageOverflow,
@@ -65,7 +67,7 @@ async function queryEventList (reload?: boolean) {
 		const res = await ticketApi.getTicketList({
 			page: page.value,
 			size: 20,
-			keyword: keyword.value
+			keyword: keyword.value,
 		});
 
 		if (reload) {
@@ -88,6 +90,16 @@ const changeList = (e: { name: string, value: Event }) => {
 // 清空搜索框
 function handleClear() {
 	keyword.value = '';
+	// 通过输入框搜索之后清空初始化列表数据
+	if (isSearchTag.value) {
+		queryEventList(true)
+		isSearchTag.value = false;
+	}
+}
+
+//  搜索
+function handleSearch() {
+	isSearchTag.value = true;
 	queryEventList(true)
 }
 
@@ -120,8 +132,8 @@ function usePageLock() {
 	<page-meta :page-style="`overflow: ${pageOverflow}`" :enable-pull-down-refresh="enablePullDownRefresh"></page-meta>
 	<view class="content-box">
 		<view class="search-box">
-			<uv-search placeholder="请输入搜索内容" v-model="keyword" @search="queryEventList(true)"
-				@custom="queryEventList(true)" @clear="handleClear"></uv-search>
+			<uv-search placeholder="请输入搜索内容" v-model="keyword" @search="handleSearch"
+				@custom="handleSearch" @clear="handleClear"></uv-search>
 		</view>
 		<view class="waterfall">
 			<uv-waterfall ref="waterfallRef" v-model="EventList" :add-time="10" :left-gap="10" :right-gap="10"
